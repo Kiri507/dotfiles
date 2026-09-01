@@ -4,7 +4,7 @@
 set $mod Mod4
 
 # Font
-font pango:monospace 8
+font pango:Terminus 6
 
 # Terminal
 bindsym $mod+Return exec alacritty --class Alacritty
@@ -18,19 +18,26 @@ smart_borders on
 gaps inner 10
 gaps outer 10
 
+# Brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
 # Autostart essential applications
-exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
-exec_always feh --bg-scale /home/kirill/Pictures/desktop.jpg
-exec_always --no-startup-id picom --config /home/kirill/.config/i3/picom.conf
+exec --no-startup-id dunst
+exec --no-startup-id picom --config ~/.config/i3/picom.conf
+exec_always --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+exec_always --no-startup-id gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+#autolock
+exec --no-startup-id xset s 1800
 
 # Audio control
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Floating modifier
@@ -44,8 +51,8 @@ bindsym $mod+l exec i3lock
 
 # Application shortcuts
 bindsym $mod+b exec firefox
-bindsym $mod+m exec flatpak run com.spotify.Client
-bindsym $mod+F9 exec --no-startup-id redshift -P -O 1500
+bindsym $mod+m exec spotify
+bindsym $mod+F9 exec redshift -P -O 1500
 bindsym $mod+F10 exec --no-startup-id redshift -x
 
 # Launcher
@@ -122,6 +129,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+
 # Reload / restart / exit
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
@@ -149,16 +157,16 @@ bindsym $mod+r mode "resize"
 bar {
     status_command i3status
     position bottom
-    font pango:Monospace 14
+    font pango:Tamzen 12
     colors {
-        background #222222
-        statusline #ffffff
-        separator  #666666
+       background #1b1b1b
+       statusline #d0d0d0
+       separator  #444444
 
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #ffffff
-        urgent_workspace   #2f343a #900000 #ffffff
+       focused_workspace  #3b6ea5 #3b6ea5 #ffffff
+       inactive_workspace #1b1b1b #1b1b1b #777777
+       active_workspace   #333333 #5f676a #ffffff
+       urgent_workspace   #2f343a #900000 #ffffff
     }
 }
 
