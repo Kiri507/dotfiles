@@ -14,7 +14,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(package-selected-packages '(all-the-icons dirvish gruvbox-theme pdf-tools)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -45,3 +45,7 @@
   :ensure t
   :config
   (load-theme 'gruvbox-dark-medium t))
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
