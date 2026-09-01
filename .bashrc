@@ -7,4 +7,5 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
+alias tty-clock='tty-clock -c -C 4 -s -f "%A, %B %d, %Y"'
+
