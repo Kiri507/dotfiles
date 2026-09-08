@@ -10,3 +10,5 @@ set positionlog
 set zap
 set multibuffer
 set locking
+
+include "/usr/share/nano/*.nanorc"
