@@ -1,0 +1,17 @@
+#!/bin/sh
+
+while :; do
+    date=$(date '+%a %d/%m %H:%M')
+
+    bat0=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null)
+    bat1=$(cat /sys/class/power_supply/BAT1/capacity 2>/dev/null)
+
+    if [ -n "$bat0" ] && [ -n "$bat1" ]; then
+        bat=$(( (bat0 + bat1) / 2 ))
+    else
+        bat=${bat0:-$bat1}
+    fi
+
+    xsetroot -name " $date  BAT ${bat}% "
+    sleep 30
+done
