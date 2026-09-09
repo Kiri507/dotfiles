@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#09599A";
+static const char col_cyan[]        = "#123B5D";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -23,13 +23,8 @@ static const char *colors[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    /* class      instance  title  tags mask  isfloating  monitor */
+    { NULL,       NULL,     NULL,  0,        0,          -1 },
 };
 
 /* layout(s) */
@@ -100,7 +95,9 @@ static const Key keys[] = {
 	{ 0, 				XF86XK_AudioRaiseVolume,	spawn, 		SHCMD("amixer set Master 10%+") },
 	{ 0, 				XF86XK_AudioLowerVolume,	spawn, 		SHCMD("amixer set Master 10%-") },
         { 0, 				XF86XK_AudioMute,       	spawn, 		SHCMD("amixer set Master toggle") },
-
+	{ 0,                            XF86XK_MonBrightnessUp,         spawn,          SHCMD("brightnessctl set +10%") },
+        { 0,                            XF86XK_MonBrightnessDown,       spawn,          SHCMD("brightnessctl set 10%-") },
+	{ MODKEY|ShiftMask,             XK_Return,                      spawn,          SHCMD("emacsclient -c -a emacs") },
 };
 
 /* button definitions */
