@@ -33,6 +33,7 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 static const int refreshrate = 120;  /* refresh rate (per second) for client move/resize */
+static const char *surf[] = { "surf", "https://searx.thefloatinglab.world/", NULL };
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -61,7 +62,7 @@ static const Key keys[] = {
 	/* modifier                     key        			function        argument */
 	{ MODKEY,                       XK_d,      			spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, 			spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      			togglebar,      {0} },
+	{ MODKEY,                       XK_u,      			togglebar,      {0} },
 	{ MODKEY,                       XK_j,      			focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      			focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      			incnmaster,     {.i = +1 } },
@@ -82,6 +83,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, 			focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  			tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, 			tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_b,               spawn,          {.v = surf} },
 	TAGKEYS(                        XK_1,                      			0)
 	TAGKEYS(                        XK_2,                      			1)
 	TAGKEYS(                        XK_3,                      			2)
@@ -116,5 +118,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
-
